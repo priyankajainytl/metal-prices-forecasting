@@ -82,10 +82,3 @@ Current tests validate core preprocessing and event-analysis logic.
 Dependencies are defined in [requirements.txt](requirements.txt).
 
 Note: Python version is not pinned in the repository yet. Use a modern Python 3.x environment compatible with Streamlit, pandas, and statsmodels.
-
-## Future Improvements
-
-- Add a CLI wrapper for preprocessing and repeatable workflows.
-- Add forecast-focused tests in addition to current preprocessing and event tests.
-- Standardize on one processed output location.
-- Add dashboard screenshots and sample analysis outputs.
