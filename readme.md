@@ -69,6 +69,34 @@ Dashboard sections are orchestrated in [src/app.py](src/app.py):
 
 The app uses caching for data loading and delegates heavy lifting to modular analysis, charting, and forecasting helpers.
 
+## Dashboard Screenshots
+
+### 1. Yearly Average Analysis
+
+![Yearly Average Analysis](src/screenshots/1.Yearly%20Average%20Analysis.png)
+
+### 2. Market Overview Dashboard
+
+![Market Overview Dashboard](src/screenshots/2.1.Market%20Overview%20Dashboard.png)
+
+![Rolling Volatility of Daily Returns](src/screenshots/2.2.Rolling%20Volatility%20of%20Daily%20Returns.png)
+
+### 3. ARIMA Forecasting
+
+![ARIMA Forecasting Controls and Chart](src/screenshots/3.1.ARIMA%20Forecasting.png)
+
+![ARIMA Forecasting Metrics and Output](src/screenshots/3.2.ARIMA%20Forecasting.png)
+
+### 4. Event Impact Summary
+
+![Event Impact Summary](src/screenshots/4.Event%20Impact%20Summary.png)
+
+### 5. Event Study
+
+![Event Study Charts](src/screenshots/5.1.Event%20Study.png)
+
+![Event Study Tables](src/screenshots/5.2.Event%20Study.png)
+
 ## Run Tests
 
 Run the test suite from the repository root:
