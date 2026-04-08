@@ -123,10 +123,36 @@ def render_forecasting(df: pd.DataFrame) -> None:
     st.subheader("Forecast Future Prices Using ARIMA")
 
     control_col1, control_col2, control_col3, control_col4 = st.columns(4)
-    selected_metal = control_col1.selectbox("Metal", ["Gold", "Silver"], index=0)
-    arima_p = control_col2.number_input("p", min_value=0, max_value=5, value=DEFAULT_ARIMA_ORDER[0], step=1)
-    arima_d = control_col3.number_input("d", min_value=0, max_value=2, value=DEFAULT_ARIMA_ORDER[1], step=1)
-    arima_q = control_col4.number_input("q", min_value=0, max_value=5, value=DEFAULT_ARIMA_ORDER[2], step=1)
+    selected_metal = control_col1.selectbox(
+        "Metal",
+        ["Gold", "Silver"],
+        index=0,
+        help="Select the target series to forecast. Gold usually behaves as a safer asset, while silver is often more cyclical.",
+    )
+    arima_p = control_col2.number_input(
+        "p",
+        min_value=0,
+        max_value=5,
+        value=DEFAULT_ARIMA_ORDER[0],
+        step=1,
+        help="Autoregressive order: number of past values used by ARIMA.",
+    )
+    arima_d = control_col3.number_input(
+        "d",
+        min_value=0,
+        max_value=2,
+        value=DEFAULT_ARIMA_ORDER[1],
+        step=1,
+        help="Differencing order: how many times the series is differenced to stabilize trend/non-stationarity.",
+    )
+    arima_q = control_col4.number_input(
+        "q",
+        min_value=0,
+        max_value=5,
+        value=DEFAULT_ARIMA_ORDER[2],
+        step=1,
+        help="Moving-average order: number of lagged forecast errors used by ARIMA.",
+    )
 
     forecast_horizon = st.slider(
         "Forecast horizon (days)",
@@ -134,6 +160,7 @@ def render_forecasting(df: pd.DataFrame) -> None:
         max_value=180,
         value=DEFAULT_FORECAST_HORIZON,
         step=1,
+        help="How many future days to predict. Shorter horizons are usually more reliable than longer ones.",
     )
     train_fraction = st.slider(
         "Train split",
@@ -141,12 +168,22 @@ def render_forecasting(df: pd.DataFrame) -> None:
         max_value=0.95,
         value=DEFAULT_TRAIN_FRACTION,
         step=0.05,
+        help="Fraction of history used for training. The remaining data is used for backtest error (MAE).",
     )
-    use_event_exog = st.checkbox("Include EVENT as exogenous feature (ARIMAX)", value=True)
+    use_event_exog = st.checkbox(
+        "Include EVENT as exogenous feature (ARIMAX)",
+        value=True,
+        help="ARIMAX adds an external event signal (event day=1, non-event=0) on top of price history.",
+    )
     history_display = st.select_slider(
         "History shown on forecast chart",
         options=[90, 180, 365, 730, "Full"],
         value=365,
+        help="Controls how much historical context is visible on the chart without changing model training.",
+    )
+
+    st.caption(
+        "Quick tuning guide: set d first, then try small p and q combinations, compare backtest MAE, and prefer the simplest setting when MAE is similar."
     )
 
     target_column = PRICE_GOLD_COLUMN if selected_metal == "Gold" else PRICE_SILVER_COLUMN
