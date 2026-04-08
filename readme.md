@@ -1,5 +1,7 @@
 # Metal Prices Forecasting
 
+![Banner image](./banner-image.png)
+
 This project analyzes gold and silver spot prices alongside geopolitical risk data and event annotations. It provides an interactive Streamlit dashboard for market exploration, event impact analysis, and ARIMA or ARIMAX forecasting.
 
 ## What This Project Covers
